@@ -14,10 +14,5 @@ namespace TicketSystemAPI.Entities
         public DbSet<EmployeeAddress> EmployeeAddresses { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientAddress> ClientAddresses { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
