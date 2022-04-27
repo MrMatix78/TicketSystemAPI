@@ -5,5 +5,6 @@ namespace TicketSystemAPI.Interfaces
 {
     public interface ITicketService
     {
+        IEnumerable<TicketDto> GetAll();
     }
 }

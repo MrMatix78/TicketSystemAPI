@@ -1,15 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using TicketSystemAPI.Interfaces;
 using TicketSystemAPI.Models;
 
 namespace TicketSystemAPI.Controllers
 {
-    public class TicketController : Controller
+    [Route("api/ticket")]
+    [ApiController]
+    public class TicketController : ControllerBase
     {
+        private readonly ITicketService _ticketService;
+
+        public TicketController(ITicketService ticketService)
+        {
+            _ticketService = ticketService;
+        }
         [HttpGet]
         public ActionResult <IEnumerable<TicketDto>> GetAll()
         {
-            return View();
+            var ticketsDtos = _ticketService.GetAll();
+
+            return Ok(ticketsDtos);
         }
     }
 }
