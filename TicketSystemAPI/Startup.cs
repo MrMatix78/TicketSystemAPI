@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicketSystemAPI.Entities;
+using TicketSystemAPI.Interfaces;
+using TicketSystemAPI.Services;
 
 namespace TicketSystemAPI
 {
@@ -37,6 +39,7 @@ namespace TicketSystemAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TicketSystemAPI", Version = "v1" });
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ITicketService, TicketService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
