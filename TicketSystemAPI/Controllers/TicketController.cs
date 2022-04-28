@@ -15,12 +15,20 @@ namespace TicketSystemAPI.Controllers
         {
             _ticketService = ticketService;
         }
+
         [HttpGet]
         public ActionResult <IEnumerable<TicketDto>> GetAll()
         {
             var ticketsDtos = _ticketService.GetAll();
 
             return Ok(ticketsDtos);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetById([FromRoute]int id)
+        {
+            var ticketDto = _ticketService.GetById(id);
+            return Ok(ticketDto);
         }
     }
 }

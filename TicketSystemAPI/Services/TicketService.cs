@@ -31,5 +31,18 @@ namespace TicketSystemAPI.Services
 
             return ticketsDtos;
         }
+
+        public TicketDto GetById(int id)
+        {
+            var ticket = _dbContext.Tickets
+                .Include(r => r.Employee)
+                .Include(r => r.Client)
+                .Include(r => r.TicketType)
+                .FirstOrDefault(r => r.Id == id);
+
+            var result = _mapper.Map<TicketDto>(ticket);
+
+            return result;
+        }
     }
 }
