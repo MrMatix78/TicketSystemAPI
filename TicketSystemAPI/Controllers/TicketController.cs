@@ -30,5 +30,13 @@ namespace TicketSystemAPI.Controllers
             var ticketDto = _ticketService.GetById(id);
             return Ok(ticketDto);
         }
+
+        [HttpPost]
+        public ActionResult Create([FromBody]CreateTicketDto dto)
+        {
+            var id = _ticketService.Create(dto);
+
+            return Created($"/api/ticket/{id}", null);
+        }
     }
 }

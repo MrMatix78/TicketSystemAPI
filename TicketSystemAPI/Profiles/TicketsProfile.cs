@@ -12,6 +12,8 @@ namespace TicketSystemAPI.Profiles
                 .ForMember(m => m.ClientName, c => c.MapFrom(s => s.Client.Name))
                 .ForMember(m => m.Login, c => c.MapFrom(s => s.Employee.Login))
                 .ForMember(m => m.TicketTypeName, c => c.MapFrom(s => s.TicketType.Name));
+
+            CreateMap<CreateTicketDto, Ticket>();
         }
     }
 }
