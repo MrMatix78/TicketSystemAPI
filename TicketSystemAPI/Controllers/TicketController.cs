@@ -16,6 +16,7 @@ namespace TicketSystemAPI.Controllers
             _ticketService = ticketService;
         }
 
+        //View all Ticket
         [HttpGet]
         public ActionResult <IEnumerable<TicketDto>> GetAll()
         {
@@ -24,6 +25,7 @@ namespace TicketSystemAPI.Controllers
             return Ok(ticketsDtos);
         }
 
+        //View Ticket by id
         [HttpGet("{id}")]
         public ActionResult GetById([FromRoute]int id)
         {
@@ -31,12 +33,25 @@ namespace TicketSystemAPI.Controllers
             return Ok(ticketDto);
         }
 
+        //Create new Ticket
         [HttpPost]
         public ActionResult Create([FromBody]CreateTicketDto dto)
         {
             var id = _ticketService.Create(dto);
 
             return Created($"/api/ticket/{id}", null);
+        }
+
+        //Update the Ticket status
+        [HttpPut("status/{id}")]
+        public ActionResult UpdateStatus([FromRoute]int id, [FromBody]UpdateTicketStatusDto dto)
+        {
+            var statusUpdate = _ticketService.UpdateStatus(id, dto); 
+            
+            if (!statusUpdate)
+                return NotFound();
+
+            return Ok();
         }
     }
 }

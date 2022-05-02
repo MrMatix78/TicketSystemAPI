@@ -53,5 +53,19 @@ namespace TicketSystemAPI.Services
 
             return result;
         }
+
+        public bool UpdateStatus(int id, UpdateTicketStatusDto dto)
+        {
+            var ticket = _dbContext.Tickets
+                .FirstOrDefault(r => r.Id == id);
+
+            if (ticket is null)
+                return false;
+
+            ticket.Status = dto.Status;
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }

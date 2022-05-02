@@ -8,5 +8,6 @@ namespace TicketSystemAPI.Interfaces
         IEnumerable<TicketDto> GetAll();
         TicketDto GetById(int id);
         int Create(CreateTicketDto dto);
+        bool UpdateStatus(int id, UpdateTicketStatusDto dto);
     }
 }
