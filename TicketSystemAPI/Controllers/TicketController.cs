@@ -53,5 +53,17 @@ namespace TicketSystemAPI.Controllers
 
             return Ok();
         }
+
+        //Delete Ticket
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute]int id)
+        {
+            var ticketDelete = _ticketService.Delete(id);
+
+            if (!ticketDelete)
+                return NotFound();
+
+            return NoContent();
+        }
     }
 }

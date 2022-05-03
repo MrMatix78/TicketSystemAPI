@@ -9,5 +9,6 @@ namespace TicketSystemAPI.Interfaces
         TicketDto GetById(int id);
         int Create(CreateTicketDto dto);
         bool UpdateStatus(int id, UpdateTicketStatusDto dto);
+        bool Delete(int id); 
     }
 }

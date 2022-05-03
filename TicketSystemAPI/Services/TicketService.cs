@@ -28,6 +28,21 @@ namespace TicketSystemAPI.Services
             return ticket.Id;
         }
 
+        public bool Delete(int id)
+        {
+            var ticket = _dbContext.Tickets
+                .FirstOrDefault(t => t.Id == id);
+
+            if(ticket is null)
+                return false;
+
+            _dbContext.Tickets.Remove(ticket);
+            _dbContext.SaveChanges();
+
+            return true;
+
+        }
+
         public IEnumerable<TicketDto> GetAll()
         {
             var tickets = _dbContext.Tickets
