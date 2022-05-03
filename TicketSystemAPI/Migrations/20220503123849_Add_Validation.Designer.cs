@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketSystemAPI.Entities;
 
 namespace TicketSystemAPI.Migrations
 {
     [DbContext(typeof(TicketSystemDbContext))]
-    partial class TicketSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503123849_Add_Validation")]
+    partial class Add_Validation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,8 @@ namespace TicketSystemAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("TicketTypeId");
+                    b.HasIndex("TicketTypeId")
+                        .IsUnique();
 
                     b.ToTable("Tickets");
                 });
@@ -225,8 +228,8 @@ namespace TicketSystemAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("TicketSystemAPI.Entities.TicketType", "TicketType")
-                        .WithMany()
-                        .HasForeignKey("TicketTypeId")
+                        .WithOne("Ticket")
+                        .HasForeignKey("TicketSystemAPI.Entities.Ticket", "TicketTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -245,6 +248,11 @@ namespace TicketSystemAPI.Migrations
             modelBuilder.Entity("TicketSystemAPI.Entities.EmployeeAddress", b =>
                 {
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("TicketSystemAPI.Entities.TicketType", b =>
+                {
+                    b.Navigation("Ticket");
                 });
 #pragma warning restore 612, 618
         }

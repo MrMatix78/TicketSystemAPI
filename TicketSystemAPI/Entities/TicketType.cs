@@ -1,4 +1,6 @@
-﻿namespace TicketSystemAPI.Entities
+﻿using System.Collections.Generic;
+
+namespace TicketSystemAPI.Entities
 {
     public class TicketType
     {
@@ -6,6 +8,5 @@
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual Ticket Ticket { get; set; }
     }
 }

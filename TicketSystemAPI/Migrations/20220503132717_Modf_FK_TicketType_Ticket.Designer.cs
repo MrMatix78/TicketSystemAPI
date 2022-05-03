@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketSystemAPI.Entities;
 
 namespace TicketSystemAPI.Migrations
 {
     [DbContext(typeof(TicketSystemDbContext))]
-    partial class TicketSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503132717_Modf_FK_TicketType_Ticket")]
+    partial class Modf_FK_TicketType_Ticket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
