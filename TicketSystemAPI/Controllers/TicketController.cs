@@ -18,7 +18,7 @@ namespace TicketSystemAPI.Controllers
 
         //View all Ticket
         [HttpGet]
-        public ActionResult <IEnumerable<TicketDto>> GetAll()
+        public ActionResult<IEnumerable<TicketDto>> GetAll()
         {
             var ticketsDtos = _ticketService.GetAll();
 
@@ -27,7 +27,7 @@ namespace TicketSystemAPI.Controllers
 
         //View Ticket by id
         [HttpGet("{id}")]
-        public ActionResult GetById([FromRoute]int id)
+        public ActionResult GetById([FromRoute] int id)
         {
             var ticketDto = _ticketService.GetById(id);
             return Ok(ticketDto);
@@ -35,7 +35,7 @@ namespace TicketSystemAPI.Controllers
 
         //Create new Ticket
         [HttpPost]
-        public ActionResult Create([FromBody]CreateTicketDto dto)
+        public ActionResult Create([FromBody] CreateTicketDto dto)
         {
             var id = _ticketService.Create(dto);
 
@@ -44,11 +44,23 @@ namespace TicketSystemAPI.Controllers
 
         //Update the Ticket status
         [HttpPut("status/{id}")]
-        public ActionResult UpdateStatus([FromRoute]int id, [FromBody]UpdateTicketStatusDto dto)
+        public ActionResult UpdateStatus([FromRoute] int id, [FromBody] UpdateTicketStatusDto dto)
         {
-            var statusUpdate = _ticketService.UpdateStatus(id, dto); 
-            
+            var statusUpdate = _ticketService.UpdateStatus(id, dto);
+
             if (!statusUpdate)
+                return NotFound();
+
+            return Ok();
+        }
+
+        //Update Ticket
+        [HttpPut("{id}")]
+        public ActionResult UpdateTicket([FromRoute] int id, [FromBody] UpdateTicketDto dto)
+        {
+            var ticketUpdate = _ticketService.UpdateTicket(id, dto);
+
+            if (!ticketUpdate)
                 return NotFound();
 
             return Ok();

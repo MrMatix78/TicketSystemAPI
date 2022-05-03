@@ -82,5 +82,25 @@ namespace TicketSystemAPI.Services
 
             return true;
         }
+
+        public bool UpdateTicket(int id, UpdateTicketDto dto)
+        {
+            var ticket = _dbContext.Tickets
+                .FirstOrDefault(r => r.Id == id);
+
+            if (ticket is null)
+                return false;
+
+            ticket.EmployeeId = dto.EmployeeId;
+            ticket.ClientId = dto.ClientId;
+            ticket.Title = dto.Title;
+            ticket.Content = dto.Content;
+            ticket.StartDate = dto.StartDate;
+            ticket.EndDate = dto.EndDate;
+            ticket.TicketTypeId = dto.TicketTypeId;
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }
