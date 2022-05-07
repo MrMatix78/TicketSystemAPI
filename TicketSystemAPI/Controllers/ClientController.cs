@@ -24,5 +24,17 @@ namespace TicketSystemAPI.Controllers
             var clientsDtos = _clientService.GetAll();
             return Ok(clientsDtos);
         }
+
+        //View client by Id
+        [HttpGet("{id}")]
+        public ActionResult<ClientDto> GetById([FromRoute]int id)
+        {
+            var clientDto = _clientService.GetById(id);
+
+            if (clientDto is null)
+                return NotFound();
+
+            return Ok(clientDto);
+        }
     }
 }

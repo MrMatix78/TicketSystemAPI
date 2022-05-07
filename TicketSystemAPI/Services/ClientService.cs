@@ -29,5 +29,16 @@ namespace TicketSystemAPI.Services
 
             return clientsDto;
         }
+
+        public ClientDto GetById(int id)
+        {
+            var client = _dbContext.Clients
+                .Include(r =>r.ClientAddress)
+                .FirstOrDefault(r => r.Id == id);
+            
+            var clientDto = _mapper.Map<ClientDto>(client);
+
+            return clientDto;
+        }
     }
 }
