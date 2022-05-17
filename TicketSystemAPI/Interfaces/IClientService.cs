@@ -7,5 +7,6 @@ namespace TicketSystemAPI.Interfaces
     {
         IEnumerable<ClientDto> GetAll();
         ClientDto GetById(int id);
+        int Create(CreateClientDto dto);
     }
 }

@@ -36,5 +36,14 @@ namespace TicketSystemAPI.Controllers
 
             return Ok(clientDto);
         }
+
+        //Create new Client
+        [HttpPost]
+        public ActionResult Create([FromBody] CreateClientDto dto)
+        {
+            var id = _clientService.Create(dto);
+
+            return Created($"/api/client/{id}", null);
+        }
     }
 }

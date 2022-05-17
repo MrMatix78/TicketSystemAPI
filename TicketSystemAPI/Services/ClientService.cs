@@ -19,6 +19,15 @@ namespace TicketSystemAPI.Services
             _mapper = mapper;
         }
 
+        public int Create(CreateClientDto dto)
+        {
+            var client = _mapper.Map<Client>(dto);
+            _dbContext.Clients.Add(client);
+            _dbContext.SaveChanges();
+
+            return client.Id;
+        }
+
         public IEnumerable<ClientDto> GetAll()
         {
             var clients = _dbContext.Clients

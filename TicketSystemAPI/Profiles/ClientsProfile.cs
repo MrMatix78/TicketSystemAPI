@@ -12,6 +12,15 @@ namespace TicketSystemAPI.Profiles
                 .ForMember(m => m.City, c => c.MapFrom(s => s.ClientAddress.City))
                 .ForMember(m => m.Street, c => c.MapFrom(s => s.ClientAddress.Street))
                 .ForMember(m => m.PostalCode, c => c.MapFrom(s => s.ClientAddress.PostalCode));
+
+            CreateMap<CreateClientDto, Client>()
+                .ForMember(r => r.ClientAddress,
+                    c => c.MapFrom(dto => new ClientAddress()
+                    {
+                        City = dto.City,
+                        PostalCode = dto.PostalCode,
+                        Street = dto.Street
+                    }));
         }
     }
 }
