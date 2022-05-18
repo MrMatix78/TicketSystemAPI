@@ -27,7 +27,7 @@ namespace TicketSystemAPI.Controllers
 
         //View client by Id
         [HttpGet("{id}")]
-        public ActionResult<ClientDto> GetById([FromRoute]int id)
+        public ActionResult<ClientDto> GetById([FromRoute] int id)
         {
             var clientDto = _clientService.GetById(id);
 
@@ -44,6 +44,17 @@ namespace TicketSystemAPI.Controllers
             var id = _clientService.Create(dto);
 
             return Created($"/api/client/{id}", null);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute]int id)
+        {
+            var isDeleted = _clientService.Delete(id);
+
+            if(!isDeleted)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
